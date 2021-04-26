@@ -23,7 +23,7 @@ passwordRouter.post('/reset',
       password: Joi.string().required(),
       password_confirmation: Joi.string().required().valid(Joi.ref('password')),
     }
-  })
+  }),
   resetPasswordController.create);
 
 export default passwordRouter;
