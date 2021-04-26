@@ -105,3 +105,6 @@ dist
 
 tmp/*
 !tmp/.gitkeep
+
+.env
+ormconfig.json
