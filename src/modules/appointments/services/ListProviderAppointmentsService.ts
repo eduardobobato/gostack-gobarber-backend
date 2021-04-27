@@ -4,6 +4,7 @@ import { getDate, getDaysInMonth } from 'date-fns';
 import AppError from '@shared/errors/AppError';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import Appointment from '../infra/typeorm/entities/Appointment';
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IRequest {
   provider_id: string;
@@ -16,7 +17,10 @@ interface IRequest {
 class ListProviderAppointmentsService {
   constructor(
     @inject('AppointmentsRepository')
-    private appointmentsRepository: IAppointmentsRepository
+    private appointmentsRepository: IAppointmentsRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
     ) {}
 
   public async execute({ provider_id, day, month, year }: IRequest): Promise<Appointment[]> {
@@ -26,7 +30,7 @@ class ListProviderAppointmentsService {
       month,
       year,
     });
-
+    await this.cacheProvider.save('1', '2');
     return appointments;
   }
 }
