@@ -10,6 +10,6 @@ export default class ForgotPasswordController {
 
     await sendForgotPassowordEmail.execute({ email });
 
-    return response.send(204).json();
+    return response.sendStatus(204).json();
   }
 }
